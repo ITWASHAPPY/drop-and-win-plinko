@@ -2,95 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Casino Gaming Design System - All colors MUST be HSL */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
+    /* Base casino theme - dark background */
+    --background: 225 25% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 225 25% 10%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 225 25% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Gaming primary - electric purple */
+    --primary: 270 95% 75%;
+    --primary-foreground: 225 25% 8%;
+    --primary-glow: 270 95% 85%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    /* Secondary - deep blue */
+    --secondary: 240 100% 25%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Muted - subtle grays */
+    --muted: 225 15% 15%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Accent - bright gold */
+    --accent: 45 100% 65%;
+    --accent-foreground: 225 25% 8%;
+    --accent-glow: 45 100% 75%;
 
-    --destructive: 0 62.8% 30.6%;
+    /* Gaming red for losses */
+    --destructive: 0 85% 65%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Success green for wins */
+    --success: 120 60% 50%;
+    --success-foreground: 210 40% 98%;
+    --success-glow: 120 60% 70%;
+
+    /* Borders and inputs */
+    --border: 225 20% 20%;
+    --input: 225 20% 15%;
+    --ring: 270 95% 75%;
+
+    --radius: 0.75rem;
+
+    /* Gaming gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(270 95% 75%), hsl(240 100% 80%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 100% 65%), hsl(35 100% 70%));
+    --gradient-success: linear-gradient(135deg, hsl(120 60% 50%), hsl(140 60% 60%));
+    --gradient-board: radial-gradient(ellipse at center, hsl(225 25% 12%), hsl(225 25% 8%));
+    
+    /* Glow effects */
+    --shadow-primary: 0 0 30px hsl(270 95% 75% / 0.3);
+    --shadow-accent: 0 0 30px hsl(45 100% 65% / 0.3);
+    --shadow-success: 0 0 30px hsl(120 60% 50% / 0.3);
+    --shadow-glow: 0 0 40px hsl(270 95% 85% / 0.4);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 }
 
