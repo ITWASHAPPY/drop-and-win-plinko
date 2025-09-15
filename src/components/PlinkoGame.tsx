@@ -73,22 +73,22 @@ export const PlinkoGame = () => {
 
     // Create pegs in triangular formation
     const pegs = [];
-    const rows = 12;
-    const pegSpacing = 50;
+    const rows = 14;
+    const pegSpacing = 45;
     
     for (let row = 0; row < rows; row++) {
       const pegsInRow = row + 3;
       const rowWidth = (pegsInRow - 1) * pegSpacing;
       const startX = (BOARD_WIDTH - rowWidth) / 2;
-      const y = 80 + row * 40;
+      const y = 60 + row * 35;
       
       for (let col = 0; col < pegsInRow; col++) {
         const x = startX + col * pegSpacing;
         const peg = Bodies.circle(x, y, PEG_RADIUS, {
           isStatic: true,
           render: {
-            fillStyle: '#8B5CF6',
-            strokeStyle: '#A78BFA',
+            fillStyle: '#FFFFFF',
+            strokeStyle: '#E5E7EB',
             lineWidth: 1
           },
           restitution: 0.8,
@@ -97,9 +97,20 @@ export const PlinkoGame = () => {
       }
     }
 
-    // Create multiplier slots at bottom
+    // Create multiplier slots at bottom with gradient colors
     const slotWidth = BOARD_WIDTH / MULTIPLIERS.length;
     const slots = [];
+    
+    // Color mapping based on multiplier values - matching the reference image
+    const getSlotColor = (mult: number) => {
+      if (mult >= 16) return '#00FF88'; // Bright green for highest
+      if (mult >= 9) return '#00D4FF';  // Cyan blue
+      if (mult >= 2) return '#FFD700';  // Gold
+      if (mult >= 1.4) return '#FFA500'; // Orange
+      if (mult >= 1.1) return '#FF6B35'; // Orange-red
+      if (mult >= 1) return '#FF4444';   // Red
+      return '#FF0000'; // Bright red for lowest
+    };
     
     for (let i = 0; i < MULTIPLIERS.length; i++) {
       const x = i * slotWidth + slotWidth / 2;
@@ -107,9 +118,9 @@ export const PlinkoGame = () => {
         isStatic: true,
         isSensor: true,
         render: {
-          fillStyle: MULTIPLIERS[i] >= 2 ? '#10B981' : MULTIPLIERS[i] === 1 ? '#6B7280' : '#EF4444',
-          strokeStyle: '#374151',
-          lineWidth: 1
+          fillStyle: getSlotColor(MULTIPLIERS[i]),
+          strokeStyle: '#1F2937',
+          lineWidth: 2
         },
         label: `slot-${i}`,
       });
@@ -180,8 +191,8 @@ export const PlinkoGame = () => {
     
     const ball = Bodies.circle(startX, 20, BALL_RADIUS, {
       render: {
-        fillStyle: '#F59E0B',
-        strokeStyle: '#FBBF24',
+        fillStyle: '#FFD700',
+        strokeStyle: '#FFA500',
         lineWidth: 2
       },
       restitution: 0.6,
@@ -236,7 +247,12 @@ export const PlinkoGame = () => {
                   <div 
                     key={index}
                     className={`text-xs font-bold px-1 py-1 rounded ${
-                      mult >= 2 ? 'text-success' : mult === 1 ? 'text-muted-foreground' : 'text-destructive'
+                      mult >= 16 ? 'text-green-400' : 
+                      mult >= 9 ? 'text-cyan-400' :
+                      mult >= 2 ? 'text-yellow-400' : 
+                      mult >= 1.4 ? 'text-orange-400' :
+                      mult >= 1.1 ? 'text-red-400' :
+                      mult >= 1 ? 'text-red-500' : 'text-red-600'
                     }`}
                   >
                     {mult}x
@@ -252,19 +268,43 @@ export const PlinkoGame = () => {
               />
               
               {/* Bottom multiplier slots visual */}
-              <div className="flex mt-2">
-                {MULTIPLIERS.map((mult, index) => (
-                  <div 
-                    key={index}
-                    className={`flex-1 py-2 text-center text-xs font-bold border-l border-border first:border-l-0 ${
-                      mult >= 2 ? 'bg-success/20 text-success' : 
-                      mult === 1 ? 'bg-muted/20 text-muted-foreground' : 
-                      'bg-destructive/20 text-destructive'
-                    }`}
-                  >
-                    {mult}x
-                  </div>
-                ))}
+              <div className="flex mt-2 rounded-b-lg overflow-hidden">
+                {MULTIPLIERS.map((mult, index) => {
+                  let bgClass = '';
+                  let textClass = '';
+                  
+                  if (mult >= 16) {
+                    bgClass = 'bg-green-500/90';
+                    textClass = 'text-white';
+                  } else if (mult >= 9) {
+                    bgClass = 'bg-cyan-500/90';
+                    textClass = 'text-white';
+                  } else if (mult >= 2) {
+                    bgClass = 'bg-yellow-500/90';
+                    textClass = 'text-black';
+                  } else if (mult >= 1.4) {
+                    bgClass = 'bg-orange-500/90';
+                    textClass = 'text-white';
+                  } else if (mult >= 1.1) {
+                    bgClass = 'bg-red-400/90';
+                    textClass = 'text-white';
+                  } else if (mult >= 1) {
+                    bgClass = 'bg-red-500/90';
+                    textClass = 'text-white';
+                  } else {
+                    bgClass = 'bg-red-600/90';
+                    textClass = 'text-white';
+                  }
+                  
+                  return (
+                    <div 
+                      key={index}
+                      className={`flex-1 py-3 text-center text-xs font-bold border-l border-background first:border-l-0 ${bgClass} ${textClass}`}
+                    >
+                      {mult}x
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
